@@ -1,0 +1,29 @@
+<html lang="ja">
+    <head>
+      <meta charset="utf-8">
+      <title>youtube_parallel_caption</title>
+      <link rel="stylesheet" href="css/main.css">
+    </head>
+
+    <body>
+      <div id="app">
+        <div>
+          <input type="text" v-model="videoId" placeholder="Enter video id">
+          <button v-on:click="startVideo">Start video</button>
+        </div>
+        <div id="player">プレイヤー表示部</div>
+        <div>
+          <div id="en-area">
+            <p>英語字幕表示部分</p>
+            <p>英語字幕表示部分</p>
+          </div>
+          <div id="jp-area">
+            <p>日本語字幕表示部分</p>
+            <p>日本語字幕表示部分</p>
+          </div>
+        </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+      <script src="js/main.js"></script>
+    </body>
+</html>
