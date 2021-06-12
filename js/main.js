@@ -48,10 +48,14 @@ var app = new Vue({
                 var textList = response.data.querySelectorAll("text")
                 textList.forEach(text => {
                     captionList.push({ time: text.getAttribute("start"), text: text.innerHTML, transText: '' });
-                });
+                })
             })
             .catch(function(error){
-                console.log(error)
+                if (error.response.data) {
+                    console.log('error!')
+                    alert("Please enter a 'collect' video id.")
+                    return
+                }
             })
             return captionList
         }
