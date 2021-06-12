@@ -11,7 +11,8 @@ var app = new Vue({
     el: '#app',
     data: {
         videoId: '',
-        captionList: ''
+        captionListEn: [],
+        captionListJa: []
     },
     methods: {
         startVideo: function(){
@@ -36,23 +37,23 @@ var app = new Vue({
                     }
                 });
             }
-            this.getCaptionList()
+            this.captionListEn = this.getCaptionList('en');
+            this.captionListJa = this.getCaptionList('ja');
         },
-        getCaptionList: function(){
-            captionList = []
-            var url = 'https://video.google.com/timedtext?hl=en&lang=en&name=&v='+this.videoId
+        getCaptionList: function(lang){
+            var captionList = []
+            var url = 'https://video.google.com/timedtext?hl=en&lang='+lang+'&name=&v='+this.videoId
             axios.get(url, { responseType: 'document' })
             .then(function(response){
                 var textList = response.data.querySelectorAll("text")
                 textList.forEach(text => {
-                    captionList.push({ time: 0 + text.getAttribute("start"), text: text.innerHTML, transText: '' });
+                    captionList.push({ time: text.getAttribute("start"), text: text.innerHTML, transText: '' });
                 });
-                console.log(captionList)
-                this.captionList = captionList
-            }.bind(this))
+            })
             .catch(function(error){
                 console.log(error)
-            }.bind(this))
+            })
+            return captionList
         }
     }
 })
