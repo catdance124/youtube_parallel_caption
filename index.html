@@ -16,15 +16,15 @@
       <section>
         <div id="en-area">
           <p>英語字幕表示部分</p>
-          <p v-for="caption in captionListEn">
-            {{ caption.text }}
+          <p v-for="(caption, index) in captionListEn" v-bind:id="caption.id" v-on:click="jumpTo('en', index)">
+            {{caption.text}}
           </p>
           <p>英語字幕表示部分</p>
         </div>
         <div id="ja-area">
           <p>日本語字幕表示部分</p>
-          <p v-for="caption in captionListJa">
-              {{ caption.text }}
+          <p v-for="(caption, index) in captionListJa" v-bind:id="caption.id" v-on:click="jumpTo('ja', index)">
+            {{caption.text}}
           </p>
           <p>日本語字幕表示部分</p>
         </div>

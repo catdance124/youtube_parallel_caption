@@ -15,7 +15,7 @@ var app = new Vue({
         captionListJa: []
     },
     methods: {
-        startVideo: function(){
+        startVideo: async function(){
             if (this.videoId == ''){
                 alert("Please enter a video id.")
                 return
@@ -37,17 +37,17 @@ var app = new Vue({
                     }
                 });
             }
-            this.captionListEn = this.getCaptionList('en');
-            this.captionListJa = this.getCaptionList('ja');
+            this.captionListEn = await this.getCaptionList('en');
+            this.captionListJa = await this.getCaptionList('ja');
         },
-        getCaptionList: function(lang){
+        getCaptionList: async function(lang){
             var captionList = []
-            var url = 'https://video.google.com/timedtext?hl=en&lang='+lang+'&name=&v='+this.videoId
-            axios.get(url, { responseType: 'document' })
+            var url = `https://video.google.com/timedtext?hl=en&lang=${lang}&name=&v=${this.videoId}`
+            await axios.get(url, { responseType: 'document' })
             .then(function(response){
                 var textList = response.data.querySelectorAll("text")
-                textList.forEach(text => {
-                    captionList.push({ time: text.getAttribute("start"), text: text.innerHTML, transText: '' });
+                textList.forEach((text, index) => {
+                    captionList.push({ id:lang+index, time: text.getAttribute("start"), text: text.innerHTML})
                 })
             })
             .catch(function(error){
@@ -58,6 +58,14 @@ var app = new Vue({
                 }
             })
             return captionList
+        },
+        jumpTo: function(lang, index){
+            if (lang == 'en'){
+                player.seekTo(this.captionListEn[index]["time"])
+            }
+            if (lang == 'ja'){
+                player.seekTo(this.captionListJa[index]["time"])
+            }
         }
     }
 })
