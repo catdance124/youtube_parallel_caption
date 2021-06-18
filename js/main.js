@@ -10,7 +10,7 @@ var player;
 var app = new Vue({
     el: '#app',
     data: {
-        videoId: '',
+        videoId: 'LVdynVuJsBo',
         captionListEn: [],
         captionListJa: []
     },
