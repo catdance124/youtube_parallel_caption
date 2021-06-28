@@ -12,7 +12,9 @@ var app = new Vue({
     data: {
         videoId: 'LVdynVuJsBo',
         captionListEn: [],
-        captionListJa: []
+        captionListJa: [],
+        preTargetEn: "en0",
+        preTargetJa: "ja0"
     },
     methods: {
         startVideo: async function(){
@@ -73,26 +75,28 @@ var app = new Vue({
             var latestCaptionEn = this.captionListEn.filter(item => item.time < currentTime).slice(-1)[0]
             if (latestCaptionEn === undefined){ latestCaptionEn = this.captionListEn[0] }
             var idEn = latestCaptionEn["id"]
-            var captionList = document.getElementById('en-area');
-            var targetCaption = document.getElementById(idEn);
+            var captionList = document.getElementById('en-area')
+            var targetCaption = document.getElementById(idEn)
             var position = targetCaption.offsetTop - captionList.offsetTop - captionList.clientHeight / 2
-            if (position < 0) { position = 0; }
-            captionList.scrollTop = position;
+            if (position < 0) { position = 0 }
+            captionList.scrollTop = position
+            document.getElementById(this.preTargetEn).style.color = ""
+            targetCaption.style.color = "red"
+            this.preTargetEn = idEn
             // ja
             var latestCaptionJa = this.captionListJa.filter(item => item.time < currentTime).slice(-1)[0]
             if (latestCaptionJa === undefined){ latestCaptionJa = this.captionListJa[0] }
             var idJa = latestCaptionJa["id"]
-            var captionList = document.getElementById('ja-area');
-            var targetCaption = document.getElementById(idJa);
+            var captionList = document.getElementById('ja-area')
+            var targetCaption = document.getElementById(idJa)
             var position = targetCaption.offsetTop - captionList.offsetTop - captionList.clientHeight / 2
-            if (position < 0) { position = 0; }
-            captionList.scrollTop = position;
+            if (position < 0) { position = 0 }
+            captionList.scrollTop = position
+            document.getElementById(this.preTargetJa).style.color = ""
+            targetCaption.style.color = "red"
+            this.preTargetJa = idJa
 
             setTimeout(this.scrollCaption, 500);
-        },
-        colorCaption: function(id){
-            var targetSrt = document.getElementById(id);
-            targetSrt.style.color = "red";
         },
         onPlayerReady: function(event){
             // event.target.playVideo();
