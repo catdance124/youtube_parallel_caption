@@ -67,8 +67,22 @@ var app = new Vue({
                 player.seekTo(this.captionListJa[index]["time"])
             }
         }, 
+        scrollCaption: function(){
+            currentTime = player.getCurrentTime();
+            // en
+            var latestCaptionEn = this.captionListEn.filter(item => item.time < currentTime).slice(-1)[0]
+            if (latestCaptionEn === undefined){ latestCaptionEn = this.captionListEn[0] }
+            var idEn = latestCaptionEn["id"]
+            // ja
+            var latestCaptionJa = this.captionListJa.filter(item => item.time < currentTime).slice(-1)[0]
+            if (latestCaptionJa === undefined){ latestCaptionJa = this.captionListJa[0] }
+            var idJa = latestCaptionJa["id"]
+            console.log(idEn, idJa)
+            setTimeout(this.scrollCaption, 500);
+        },
         onPlayerReady: function(event){
             // event.target.playVideo();
+            setTimeout(this.scrollCaption, 500);
         },
         onPlayerStateChange: function(event){
             // if (event.data == YT.PlayerState.PLAYING && !done) {
