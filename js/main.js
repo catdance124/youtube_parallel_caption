@@ -32,8 +32,8 @@ var app = new Vue({
                     videoId: this.videoId,
                     startSeconds: 0,
                     events: {
-                        'onReady': onPlayerReady,
-                        'onStateChange': onPlayerStateChange
+                        'onReady': this.onPlayerReady,
+                        'onStateChange': this.onPlayerStateChange
                     }
                 });
             }
@@ -66,20 +66,19 @@ var app = new Vue({
             if (lang == 'ja'){
                 player.seekTo(this.captionListJa[index]["time"])
             }
-        }
+        }, 
+        onPlayerReady: function(event){
+            // event.target.playVideo();
+        },
+        onPlayerStateChange: function(event){
+            // if (event.data == YT.PlayerState.PLAYING && !done) {
+            //     setTimeout(stopVideo, 6000);
+            //     done = true;
+            // }
+        },
+        stopVideo: function(event){
+            player.stopVideo();
+        },
+        
     }
 })
-
-function onPlayerReady(event) {
-    // event.target.playVideo();
-}
-
-function onPlayerStateChange(event) {
-    // if (event.data == YT.PlayerState.PLAYING && !done) {
-    //     setTimeout(stopVideo, 6000);
-    //     done = true;
-    // }
-}
-function stopVideo() {
-    player.stopVideo();
-}
