@@ -33,6 +33,9 @@ var app = new Vue({
                     width: '640',
                     videoId: this.videoId,
                     startSeconds: 0,
+                    playerVars: {
+                        playsinline: 1
+                    },
                     events: {
                         'onReady': this.onPlayerReady,
                         'onStateChange': this.onPlayerStateChange
