@@ -33,8 +33,8 @@ var app = new Vue({
                 player.playVideo();
             }else{
                 player = new YT.Player('player', {
-                    // height: '360',
-                    // width: '640',
+                    height: '360',
+                    width: '640',
                     videoId: this.videoId,
                     startSeconds: 0,
                     playerVars: {
@@ -48,6 +48,7 @@ var app = new Vue({
             }
             this.captionListEn = await this.getCaptionList('en');
             this.captionListJa = await this.getCaptionList('ja');
+            this.handleResize()
         },
         getCaptionList: async function(lang){
             var captionList = []
@@ -120,14 +121,15 @@ var app = new Vue({
         },
         handleResize: function(){
             if (window.innerWidth <= 768) {
-                this.captionStyleObject["height"] = "200px"
+                this.captionStyleObject["height"] = "180px";
+                player.setSize(width=384, height=216);
             } else {
-                this.captionStyleObject["height"] = "500px"
+                this.captionStyleObject["height"] = "500px";
+                player.setSize(width=640, height=360);
             }
         }
     },
     mounted: function () {
-        this.handleResize()
         window.addEventListener('resize', this.handleResize)
     },
     beforeDestroy: function () {
