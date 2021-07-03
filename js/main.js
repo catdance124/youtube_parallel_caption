@@ -14,7 +14,11 @@ var app = new Vue({
         captionListEn: [],
         captionListJa: [],
         preTargetEn: "en0",
-        preTargetJa: "ja0"
+        preTargetJa: "ja0",
+        captionStyleObject: {
+            overflow:"auto",
+            height:"500px",
+          },
     },
     methods: {
         startVideo: async function(){
@@ -29,8 +33,8 @@ var app = new Vue({
                 player.playVideo();
             }else{
                 player = new YT.Player('player', {
-                    height: '360',
-                    width: '640',
+                    // height: '360',
+                    // width: '640',
                     videoId: this.videoId,
                     startSeconds: 0,
                     playerVars: {
@@ -114,6 +118,19 @@ var app = new Vue({
         stopVideo: function(event){
             player.stopVideo();
         },
-        
+        handleResize: function(){
+            if (window.innerWidth <= 768) {
+                this.captionStyleObject["height"] = "200px"
+            } else {
+                this.captionStyleObject["height"] = "500px"
+            }
+        }
+    },
+    mounted: function () {
+        this.handleResize()
+        window.addEventListener('resize', this.handleResize)
+    },
+    beforeDestroy: function () {
+        window.removeEventListener('resize', this.handleResize)
     }
 })

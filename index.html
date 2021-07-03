@@ -25,13 +25,13 @@
         <div id="player" class="col-12">[[ Player display area ]]</div>
       </div>
       <section class="row">
-        <div id="en-area" class="col-6 position-static">
+        <div id="en-area" class="col-sm-12 col-md-6 position-static" v-bind:style="captionStyleObject">
           <p>====== English caption ======</p>
           <p v-for="(caption, index) in captionListEn" v-bind:id="caption.id" v-on:click="jumpTo('en', index)">
             {{caption.text}}
           </p>
         </div>
-        <div id="ja-area" class="col-6 position-static">
+        <div id="ja-area" class="col-sm-12 col-md-6 position-static" v-bind:style="captionStyleObject">
           <p>====== Japanese caption ======</p>
           <p v-for="(caption, index) in captionListJa" v-bind:id="caption.id" v-on:click="jumpTo('ja', index)">
             {{caption.text}}
