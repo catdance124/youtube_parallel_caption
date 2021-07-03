@@ -1,13 +1,9 @@
 #en-area {
-    float: left;
     overflow:auto;
-    width:50%;
     height:500px;
 }
 #ja-area {
-    float: right;
     overflow:auto;
-    width:50%;
     height:500px;
 }
 p {

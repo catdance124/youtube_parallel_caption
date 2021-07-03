@@ -2,25 +2,36 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>youtube_parallel_caption</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
+    <title>youtube_parallel_caption</title>
   </head>
 
   <body>
-    <div id="app">
-      <div>
-        <input type="text" v-model="videoId" placeholder="Enter video id">
-        <button v-on:click="startVideo">Start video</button>
+    <div id="app" class="container">
+      <div class="row">
+        <div class="col-8 input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Video ID:</span>
+          </div>
+          <input type="text" v-model="videoId" placeholder="video id" class="form-control">
+          <div class="input-group-append">
+            <button v-on:click="startVideo" class="btn btn-info">Start video</button>
+          </div>
+        </div>
       </div>
-      <div id="player">[[ Player display area ]]</div>
-      <section>
-        <div id="en-area">
+      <div class="row">
+        <div id="player" class="col-12">[[ Player display area ]]</div>
+      </div>
+      <section class="row">
+        <div id="en-area" class="col-6 position-static">
           <p>====== English caption ======</p>
           <p v-for="(caption, index) in captionListEn" v-bind:id="caption.id" v-on:click="jumpTo('en', index)">
             {{caption.text}}
           </p>
         </div>
-        <div id="ja-area">
+        <div id="ja-area" class="col-6 position-static">
           <p>====== Japanese caption ======</p>
           <p v-for="(caption, index) in captionListJa" v-bind:id="caption.id" v-on:click="jumpTo('ja', index)">
             {{caption.text}}
