@@ -12,27 +12,21 @@
         <input type="text" v-model="videoId" placeholder="Enter video id">
         <button v-on:click="startVideo">Start video</button>
       </div>
-      <div id="player">プレイヤー表示部</div>
+      <div id="player">[[ Player display area ]]</div>
       <section>
         <div id="en-area">
-          <p>英語字幕表示部分</p>
+          <p>====== English caption ======</p>
           <p v-for="(caption, index) in captionListEn" v-bind:id="caption.id" v-on:click="jumpTo('en', index)">
             {{caption.text}}
           </p>
-          <p>英語字幕表示部分</p>
         </div>
         <div id="ja-area">
-          <p>日本語字幕表示部分</p>
+          <p>====== Japanese caption ======</p>
           <p v-for="(caption, index) in captionListJa" v-bind:id="caption.id" v-on:click="jumpTo('ja', index)">
             {{caption.text}}
           </p>
-          <p>日本語字幕表示部分</p>
         </div>
       </section>
-      <pre style="clear:both;">
-        <hr>
-        {{$data}}
-      </pre>
     </div>
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
